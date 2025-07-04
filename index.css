@@ -42,9 +42,10 @@ table {
     height: 80%;
     background-color:  white;
     border-radius: 50%;
-    z-index: 100;
+    z-index: 99;
     border: .15rem solid#000;
     border-bottom: .1rem solid white;
+    
 }
 
 .progress::after{
@@ -104,7 +105,7 @@ table {
     transform: translate(-50%, -50%);
     transform: rotate(0deg) ;
     transform-origin: center right;
-    z-index: 100;
+    z-index: 80;
         /* ただし、普段は透明にして見えなくしておく */
     opacity: 0;
     /* opacityプロパティが変更されたら、0.5秒かけてフワッと変化させる */
@@ -194,7 +195,6 @@ h2 {
 }
 
 
-
 /* 画面が狭いときに縦並びにするためのメディアクエリ */
 @media (max-width: 600px) {
     .gauge-columns {
@@ -213,8 +213,8 @@ h2 {
     width: 10em;
     position: relative;
     perspective: 1000px;
-    top: 50%;
-    transform: translate(50%, -110%);
+    top: -50%;
+    transform: translate(0%, 15%);
     z-index: 100;
 }
 
@@ -258,7 +258,7 @@ h2 {
 }
 
 .top {
-    background-color: blue;
+    background-color: #FFBBBB;
     top: -2.5em;
     transform: rotateX(90deg);
 }
