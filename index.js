@@ -87,7 +87,7 @@ const color_yellow = {r: 255, g: 255, b: 0};
 const color_red = {r: 255, g: 0, b: 0};
 
 
-let current_turn = 0;
+let current_turn = 0.25;
 //boxを回転させる関数
 
 
@@ -297,8 +297,7 @@ function rotate_box(){
     }
     
     current_turn += 0.25;
-
-    console.log(`現在の角度: ${current_turn}turn`);
+    // console.log(`現在の角度: ${current_turn}turn`);
 }
 
 function updateAll() {
