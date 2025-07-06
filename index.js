@@ -164,7 +164,7 @@ function updateTime(Array, ClassName) {
                         // white_bar.style.zIndex = '100';
 
                     }
-                    console.log(targetRotationDegree)
+                    // console.log(targetRotationDegree)
 
                     // if(targetRotationDegree - angle_previous >= 5){
                     //     main_bar.style.transform = `rotate(0deg)`; // メインバーを半周固定
@@ -219,7 +219,7 @@ function updateTime(Array, ClassName) {
                 if (main_bar) {
                 main_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
                 sub_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
-                console.log(currentColor);
+                // console.log(currentColor);
                 }
 
                 // console.log(section);//1080;
@@ -233,13 +233,13 @@ function updateTime(Array, ClassName) {
                 const elapsed_time_color2 = color_change_threshold_3 - time_difference;
                 const progress = elapsed_time_color  / section;//これで0~1に収める
                 const progress2 = elapsed_time_color2  / section2;//これで0~1に収める
-                console.log(progress)
+                // console.log(progress)
                 currentColor.r = (color_green.r + (color_yellow.r - color_green.r) * progress);
                 currentColor.g = (color_yellow.g + (color_red.g - color_yellow.g) * progress2);
                 if (main_bar) {
                 main_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
                 sub_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
-                console.log(currentColor);
+                // console.log(currentColor);
                 }
 
 
@@ -252,7 +252,7 @@ function updateTime(Array, ClassName) {
                 if (main_bar) {
                 main_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
                 sub_bar.style.backgroundColor = `rgb(${Math.max(0, Math.min(255, Math.round(currentColor.r)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.g)))}, ${Math.max(0, Math.min(255, Math.round(currentColor.b)))})`;
-                console.log(currentColor);
+                // console.log(currentColor);
                 }
             }
 
@@ -268,7 +268,6 @@ function updateTime(Array, ClassName) {
             limit_text.classList.add('time--closed');
             secondsElement.textContent = '';
             limit_text.classList.add('time_flame--closed')
-            content.classList.add('.content--stop')
 
             main_bar.style.transform = `rotate(0deg)`; // メインバーを半周固定
             white_bar.style.zIndex = `0`; // メインバーを半周固定
@@ -291,17 +290,13 @@ function updateTime(Array, ClassName) {
 
 function rotate_box(){
 
-    const boxes = document.querySelector('.content');
+    const boxes = document.querySelectorAll('.content');
     for(let i = 0; i < boxes.length; i++){
         const box = boxes[i];
         box.style.transform = `rotateX(${current_turn}turn)`;
     }
     
     current_turn += 0.25;
-
-    if(current_turn >= 1){
-    current_turn = 0;
-    }
 
     console.log(`現在の角度: ${current_turn}turn`);
 }
@@ -322,7 +317,7 @@ function startTimer() {
 
 
         //3Dボックスの回転
-        setInterval(rotate_box, 5000);
+        setInterval(rotate_box, 8000);
     }, delay);
 }
 

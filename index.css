@@ -1,6 +1,6 @@
 body{
     opacity:0 ;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 1.2s ease-out;
 }
 
 body.loaded {
@@ -208,88 +208,60 @@ h2 {
 }
 
 
-.container {
-    height: 10em;
-    width: 10em;
-    position: relative;
-    perspective: 1000px;
-    top: -50%;
-    transform: translate(0%, 15%);
-    z-index: 100;
-}
 
-.content div {
-    transition: transform 3s;
+
+.container {
+  transform: translate(5%, -180%);
+  width: 200px;
+  height: 80px;
+  perspective: 800px;
+  margin: 50px auto;
+  position: relative;
+  z-index: 100;
+  
 }
 
 .content {
-    height: 10em;
-    width: 10em;
-    position: relative;
-    transform-style: preserve-3d;
-    left: 45%;
-    top: -50%;
-    transform-origin: 50% 50%;
-    transform: rotateX(1turn);
+  width: 200px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: 3s;
 }
 
-
-.content div {
-    position: absolute;
-    /* opacity: ; */
+/* 面の基本設定 */
+.face {
+  position: absolute;
+  background: #FFBBBB;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  /* text-align: center; */
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
-.w10 {
-    width: 13em;
+/* 各面のサイズ */
+.front, .back {
+  width: 200px;
+  height: 80px;
+}
+.right, .left {
+  width: 80px;   /* 奥行き */
+  height: 80px;
+}
+.top, .bottom {
+  width: 200px;
+  height: 80px;  /* 奥行き */
 }
 
-.h10 {
-    height: 5em;
-}
-
-.w5 {
-    width: 13em;
-}
-
-.h5 {
-    height: 5em;
-}
-
-.top {
-    background-color: #FFBBBB;
-    top: -2.5em;
-    transform: rotateX(90deg);
-}
-
-.bottom {
-    background-color: #FFBBBB;
-    bottom: 2.5em;
-    transform: rotateX(-90deg);
-}
-
-.left {
-    background-color: #FFBBBB;
-    left: -2.5em;
-    transform: rotateY(-90deg);
-    width: 5rem;
-}
-
-.right {
-    background-color: #FFBBBB;
-    right: -5.5em;
-    transform: rotateY(90deg);
-    width: 5rem;
-}
-
-.front {
-    background-color: #FFBBBB;
-    transform: translateZ(2.5em);
-    z-index: 10;
-}
-
-.back {
-    background-color: #FFBBBB;
-    transform: translateZ(-2.5em) rotateY(180deg);
-}
+/* 各面の配置 */
+.front  { transform: translateZ(40px); }
+.back   { transform: translateZ(-40px) rotateX(180deg); }
+.right  { width: 80px; transform: rotateY(90deg) translateZ(160px); }
+.left   { width: 80px; transform: rotateY(-90deg) translateZ(40px); }
+.top    { height: 80px; transform: rotateX(90deg) translateZ(40px); }
+.bottom { height: 80px; transform: rotateX(-90deg) translateZ(40px); }
