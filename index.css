@@ -144,8 +144,8 @@ table {
 }
 
 .time--closed {
-    top: -100%;
-    transform: translate(2.5%, -60%);
+    top: -50%;
+    transform: translate(0%, 30%);
     font-size: 35%;
     color: red;
     white-space: nowrap;
@@ -211,7 +211,7 @@ h2 {
 
 
 .container {
-  transform: translate(5%, -180%);
+  transform: translate(2%, -180%);
   width: 200px;
   height: 80px;
   perspective: 800px;
@@ -227,7 +227,7 @@ h2 {
   position: relative;
   transform-style: preserve-3d;
   transform-origin: center center;
-  transition: 3s;
+  transition: 3s ease-in-out;
 }
 
 /* 面の基本設定 */
@@ -248,14 +248,19 @@ h2 {
 .front, .back {
   width: 200px;
   height: 80px;
+  border: 0.1px solid red;
 }
 .right, .left {
   width: 80px;   /* 奥行き */
   height: 80px;
+  border: 0.1px solid red;
+
 }
 .top, .bottom {
   width: 200px;
   height: 80px;  /* 奥行き */
+  border: 0.1px solid red;
+
 }
 
 /* 各面の配置 */

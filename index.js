@@ -47,6 +47,52 @@ let BusTime_FromStation = [
     76500                           // 1275 → 21時台
 ];
 
+//メッセージ
+let messages_safe_from_station = [
+    "今日もお疲れ様です。",
+    "たまにはご褒美",
+    "ひとやすみ、ひとやすみ",
+    "時間もあるし、課題する？",
+    "Let it be ~~",
+    "いつでもだれとでも繋がれる時代になってから、みんな焦っている気がする",
+]
+let messages_safe_from_university = [
+    "今日もお疲れ様です。",
+    "たまにはご褒美",
+    "ひとやすみ、ひとやすみ",
+    "時間もあるし、課題する？",
+    "Let it be ~~",
+    "いつでもだれとでも繋がれる時代になってから、みんな焦っている気がする",
+    "今日の天気はどんな感じ？",
+]
+
+let messages_normal_from_station = [
+    "",
+    "ゆっくり休んでくださいね",
+    "ハングリーであれ、バカであれ",
+    "心配するな、何とかなる！",
+    "",
+]
+let messages_normal_from_university = [
+    "ゆっくり休んでくださいね",
+    "ハングリーであれ、バカであれ",
+    "心配するな、何とかなる！",
+]
+
+let messages_danger_from_station = [
+    "今日もお疲れ様です",
+    "ゆっくり休んでくださいね",
+    "ハングリーであれ、バカであれ",
+    "心配するな、何とかなる！",
+]
+let messages_danger_from_university = [
+    "今日もお疲れ様です",
+    "ゆっくり休んでくださいね",
+    "ハングリーであれ、バカであれ",
+    "心配するな、何とかなる！",
+    "",
+]
+
 // ゲージの回転範囲
 //0~-325度まで、
 //秒数を角度で割ることで、1秒間に進むべき角度をしめす。
@@ -161,7 +207,7 @@ function updateTime(Array, ClassName) {
                         sub_bar.style.transform = `rotate(-${targetRotationDegree}deg)`;
                         white_bar.classList.add('is-visible');
 
-                        // white_bar.style.zIndex = '100';
+                        white_bar.style.zIndex = '10';
 
                     }
                     // console.log(targetRotationDegree)
