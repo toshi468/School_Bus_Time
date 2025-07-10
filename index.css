@@ -228,6 +228,7 @@ h2 {
   transform-style: preserve-3d;
   transform-origin: center center;
   transition: 3s ease-in-out;
+  transform: rotateX(2.5turn);
 }
 
 /* 面の基本設定 */
