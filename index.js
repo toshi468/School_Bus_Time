@@ -431,6 +431,7 @@ function word_select(array, ClassName){
         const random = Math.floor(Math.random() * filter_words.length);
         current_word_from_station = filter_words[random];
         return current_word_from_station
+        
     }
 
     // console.log(filter_words);

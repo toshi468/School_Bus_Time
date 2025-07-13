@@ -39,6 +39,7 @@ table {
     outline: .2rem solid #000;
     outline-offset: .4rem;
     overflow: hidden;
+    
 }
 
 .progress::before{
