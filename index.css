@@ -7,16 +7,24 @@ body.loaded {
     opacity: 1;
 }
 
+.h1{
+    font-family: 'Courier New', Courier, monospace;
+    -webkit-text-stroke: white 0.1rem;
+}
+
 table {
-    margin: 0 auto;
+    background-image: url("./image/bus_stop_afternoon.jpg");
+    background-size: cover;
     width: 100%;
     border-spacing: 5rem;
+    border:2px solid #000;
 }
 
 .gauge {
     margin: 0 auto;
     width: 350px;
     height: 350px;
+    background-color: firebrick;
 }
 
 .progress {
@@ -109,7 +117,6 @@ table {
         /* ただし、普段は透明にして見えなくしておく */
     opacity: 0;
     /* opacityプロパティが変更されたら、0.5秒かけてフワッと変化させる */
-    transition: opacity 1.3s ease;
 
 }
 
