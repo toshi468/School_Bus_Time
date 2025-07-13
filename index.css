@@ -24,8 +24,10 @@ table {
     margin: 0 auto;
     width: 350px;
     height: 350px;
-    background-color: firebrick;
+    background-size: 500px 500px;
+    background-position: center;
 }
+
 
 .progress {
     position: relative;
@@ -37,7 +39,6 @@ table {
     outline: .2rem solid #000;
     outline-offset: .4rem;
     overflow: hidden;
-
 }
 
 .progress::before{
@@ -57,12 +58,17 @@ table {
 }
 
 .progress::after{
+    content: "";
     position: absolute;
-    content: '';
-    top: 50%;
-    width: 54%;
-    transform: translate(43%, 0%);
-    height: 50%;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background-image: url("./image/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
 }
 
 .bar {
@@ -108,7 +114,7 @@ table {
     left: 50%;
     width: 60%;
     height: 150%;
-    background-color: white;
+    background-color: #F0E7D1;
     /* background-color: pink; */
     transform: translate(-50%, -50%);
     transform: rotate(0deg) ;
@@ -117,6 +123,7 @@ table {
         /* ただし、普段は透明にして見えなくしておく */
     opacity: 0;
     /* opacityプロパティが変更されたら、0.5秒かけてフワッと変化させる */
+    transition: opacity 0.9s ease-in-out;
 
 }
 

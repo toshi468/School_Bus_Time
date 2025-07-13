@@ -415,7 +415,7 @@ function assignment(current_turn ,array, ClassName){
         const now_box = class_box.querySelector('.front');
         now_box.textContent = word_select(array, ClassName);
     }
-    console.log(current_box);
+    // console.log(current_box);
 }
 
 function word_select(array, ClassName){
@@ -433,12 +433,22 @@ function word_select(array, ClassName){
         return current_word_from_station
     }
 
-    console.log(filter_words);
+    // console.log(filter_words);
+}
+
+function now() {
+    const nowElement = document.querySelector('.now');
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    nowElement.textContent = `現在の時刻: ${hours}:${minutes}:${seconds}`;
 }
 
 function updateAll() {
     updateTime(BusTime_FromUniversity, "from_university");
     updateTime(BusTime_FromStation, "from_station");
+    now(); // 現在の時刻を表示する関数を呼び出す
 }
 
 
