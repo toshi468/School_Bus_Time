@@ -1,0 +1,425 @@
+@charset "UTF-8";
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* overflow-x: hidden;
+  overflow-y: hidden; */
+}
+
+html {
+  background-image: url("./image/bus_stop_afternoon.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.header {
+  display: flex;
+  background-color: yellowgreen;
+  gap: 15px;
+  align-items: center;
+  height: 70px;
+}
+.header .wall {
+  font-size: 3rem;
+  transform: translate(0%, -10%);
+  color: rgb(140, 155, 8);
+}
+.header .link {
+  margin-left: 20px;
+}
+.header a:link, .header a:visited, .header a:hover, .header a:active {
+  color: blue;
+}
+.header .title {
+  font-family: "Courier New", Courier, monospace;
+  -webkit-text-stroke: white 0.1rem;
+  font-size: 2.5rem;
+}
+
+.now {
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  width: 50%;
+  margin: 10px auto;
+  background-color: #3094FE;
+}
+.now .now_day, .now .now_time {
+  font-family: "Courier New", Courier, monospace;
+  -webkit-text-stroke: white 0.1rem;
+  color: white;
+  font-size: 2rem;
+}
+
+/* 「大学 発」と「駅 発」の親を横並びに */
+.kanban {
+  display: flex;
+  justify-content: center;
+  gap: 250px; /* 2つの「大学 発」と「駅 発」の間隔 */
+}
+.kanban .bus_title {
+  display: flex;
+  font-size: 1rem;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  line-height: 0;
+  background-image: url("./image/waku_kanbandai_tuta.png");
+  background-position: center;
+  background-size: 100%;
+}
+.kanban .bus_title h2, .kanban .bus_title h3 {
+  margin: 1.5rem;
+}
+.kanban .bus_title .bus_now_next {
+  display: flex;
+  font-size: 1.3rem;
+  margin: 0;
+  gap: 0.05rem;
+}
+.kanban .bus_title .now_plan {
+  font-family: "Courier New", Courier, monospace;
+  -webkit-text-stroke: rgb(87, 51, 4) 0.05rem;
+  color: #ffee00;
+}
+.kanban .bus_title .next_plan {
+  font-family: "Courier New", Courier, monospace;
+  -webkit-text-stroke: rgb(87, 51, 4) 0.05rem;
+  color: #02f50e;
+}
+.kanban .bus_title .where_to {
+  font-size: 2.5rem;
+}
+.kanban .gauge {
+  margin: 40px;
+}
+
+.gauge {
+  position: relative;
+  margin: 0 auto;
+  width: 350px;
+  height: 350px;
+}
+
+.gauge::before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  content: "";
+  background-image: url(image/background.png);
+  width: 400px;
+  height: 400px;
+  border-radius: 11%;
+}
+
+.gauge::after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-49%, -55%);
+  position: absolute;
+  border-radius: 60%;
+  background-color: rgb(192, 190, 190);
+  content: "";
+  width: 350px;
+  height: 314px;
+  z-index: 9;
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  border: 0.3rem solid #000;
+  border-bottom: 0.1rem solid white;
+  border-radius: 50%;
+  /* outline: .2rem solid #000; */
+  outline-offset: 0.4rem;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.progress::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 99;
+  /* border: .15rem solid#000; */
+  border-bottom: 0.1rem solid white;
+}
+
+.bar {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 70%;
+  height: 130%;
+  /* background-color: gray; */
+  transform: translate(-50%, -50%);
+  transform: rotate(0deg);
+  transform-origin: center left;
+  z-index: 1;
+}
+
+/* -325degで隠れる */
+.bar2 {
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  width: 60%;
+  height: 150%;
+  /* background-color: gray; */
+  transform: translate(-50%, -50%);
+  transform: rotate(-180deg);
+  transform-origin: center left;
+}
+
+.bar {
+  /* transform（回転）プロパティが変更されたら、1秒かけてアニメーション */
+  /* cubic-bezier(...)は動きを滑らかにするおまじないです */
+  transition: transform 1.5s cubic-bezier(0.5, 1, 0.8, 1);
+}
+
+/* -180deg */
+.bar .bar2 {
+  transition: 1s;
+}
+
+.bar-white {
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  width: 60%;
+  height: 150%;
+  background-color: rgb(192, 190, 190);
+  /* background-color: pink; */
+  transform: translate(-50%, -50%);
+  transform: rotate(0deg);
+  transform-origin: center right;
+  z-index: 15;
+  /* ただし、普段は透明にして見えなくしておく */
+  opacity: 1;
+  /* opacityプロパティが変更されたら、0.5秒かけてフワッと変化させる */
+  transition: opacity 0.9s ease-in-out;
+}
+
+.time_flame {
+  position: relative;
+  top: -100%;
+  left: 22.5%;
+  height: 50%;
+  width: 70%;
+  /* border: .1rem solid #000; */
+  transform: translate(-8%, 50%);
+  z-index: 400;
+}
+
+.time {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translate(-10%, -80%);
+  font-size: 720%;
+  text-align: center;
+  size: 100px;
+}
+
+.time--clock {
+  font-size: 720%;
+}
+
+.time--closed {
+  top: -50%;
+  transform: translate(0%, 30%);
+  font-size: 35%;
+  color: red;
+  white-space: nowrap;
+}
+
+.time_flame::before {
+  content: "残り時間";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 250%;
+  color: #555;
+  white-space: nowrap;
+  -webkit-text-stroke: 0.6px #4808dd;
+}
+
+.time_flame--closed::before {
+  content: "";
+}
+
+.seconds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translate(0%, -30%);
+  font-size: 720%;
+  text-align: center;
+  size: 100px;
+}
+
+/* 画面が狭いときに縦並びにするためのメディアクエリ */
+@media (max-width: 600px) {
+  .gauge-columns {
+    flex-direction: column; /* 縦並びにする */
+    align-items: center; /* 中央揃え */
+  }
+  .gauge-column {
+    width: 90%; /* 小さな画面では幅を少し狭める */
+    max-width: 350px; /* スマートフォンでの最大の幅を制限 */
+  }
+}
+.container {
+  transform: translate(2%, -180%);
+  width: 200px;
+  height: 80px;
+  perspective: 800px;
+  margin: 50px auto;
+  position: relative;
+  z-index: 100;
+}
+
+.content {
+  width: 200px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: 3s ease-in-out;
+  transform: rotateX(2.5turn);
+}
+
+/* 面の基本設定 */
+.face {
+  position: absolute;
+  background: #FFBBBB;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  /* text-align: center; */
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 各面のサイズ */
+.front, .back {
+  width: 200px;
+  height: 80px;
+  border: 0.1px solid red;
+}
+
+.right, .left {
+  width: 80px; /* 奥行き */
+  height: 80px;
+  border: 0.1px solid red;
+}
+
+.top, .bottom {
+  width: 200px;
+  height: 80px; /* 奥行き */
+  border: 0.1px solid red;
+}
+
+/* 各面の配置 */
+.front {
+  transform: translateZ(40px);
+}
+
+.back {
+  transform: translateZ(-40px) rotateX(180deg);
+}
+
+.right {
+  width: 80px;
+  transform: rotateY(90deg) translateZ(160px);
+}
+
+.left {
+  width: 80px;
+  transform: rotateY(-90deg) translateZ(40px);
+}
+
+.top {
+  height: 80px;
+  transform: rotateX(90deg) translateZ(40px);
+}
+
+.bottom {
+  height: 80px;
+  transform: rotateX(-90deg) translateZ(40px);
+}
+
+.bussAnimation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.bussAnimation .Buss_left_container {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-120%, -80%);
+}
+.bussAnimation .Buss_left_container .Buss_right {
+  scale: 1.3;
+}
+.bussAnimation .Buss_right_container {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(60%, -80%);
+}
+.bussAnimation .Buss_right_container .Buss_left {
+  scale: 1.3;
+}
+.bussAnimation .Sleep {
+  transform: translate(-40%, -70%);
+  scale: 0.5;
+}
+
+/* .Buss_right{
+    position: relative;
+    top: 50%;
+    right: 50%;
+    transform: translate(-100%, -100%);
+} */
+/* .Buss{
+    /* animation: sleep 4s infinite; 
+} */
+@keyframes sleep_left {
+  0%, 100% {
+    transform: translate(-180%, -80%) scaleY(1.2);
+  }
+  50% {
+    transform: translate(-180%, -84%) scaleY(1.25);
+  }
+}
+@keyframes sleep_right {
+  0%, 100% {
+    transform: translate(110%, -80%) scaleY(1.2);
+  }
+  50% {
+    transform: translate(110%, -84%) scaleY(1.25);
+  }
+}/*# sourceMappingURL=style.css.map */

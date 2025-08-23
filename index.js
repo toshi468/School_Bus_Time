@@ -1,5 +1,5 @@
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     //大学からの時刻表 秒単位 //分単位にしています。
     // (7:00→420)(19:00→1140)
     //↑(時間×60, 分はそのまま足す)
@@ -146,9 +146,6 @@ let message_flag = 0;
 //同じ単語を連続で引いてほしくないので採用しています
 let current_word_from_university = null;
 let current_word_from_station = null;
-let current_word = null;
-
-
 
 // ゲージの回転範囲
 //0~-325度まで、
@@ -200,12 +197,23 @@ function updateTime(Array, ClassName) {
     const now = new Date();
     const total_seconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds() + 1;//時刻が1秒ずれるのを+1でカバー(対症療法(根本的解決にはなってません))
     const nextBus = Array.find(time => time > total_seconds);
-    
+    const candidate = Array.find(time => time > nextBus);
+    const nextNextBus = candidate !== undefined ? candidate : Array[0]; // 次の次のバスの時刻を取得
+
+    const background = document.querySelector('html');
+    const now_Hour = now.getHours();
+    if(6 <= now_Hour && now_Hour < 17){
+        console.log(now_Hour);
+        background.style.backgroundImage = 'url(./image/bus_stop_afternoon.jpg)';
+    }else if(17 <= now_Hour && now_Hour < 19){
+        background.style.backgroundImage = 'url(./image/bus_stop_evening.jpg)';
+    }else if(19 <= now_Hour && 6 < now_Hour){
+        background.style.backgroundImage = 'url(./image/bus_stop_night.jpg)';
+    }
     // console.log(nextBus)
     // console.log(total_seconds)
-    
 
-    const timeElement = document.querySelector(`.${ClassName} .time`);
+    const timeElement = document.querySelector(`.${ClassName} .time_flame .time`);
     const secondsElement = document.querySelector(`.${ClassName} .seconds`);
     const limit_text = document.querySelector(`.${ClassName} .time_flame`);
     const main_bar = document.querySelector(`.${ClassName} .bar`); // ここでメインとなるバーを取得
@@ -217,6 +225,16 @@ function updateTime(Array, ClassName) {
         // 次のバスの時刻から現在までの時間を計算する(残り時間を取得)
         const time_difference = nextBus - total_seconds;
         // console.log(time_difference)
+
+        const now_planElement = document.querySelector(`.${ClassName} .bus_now_next .now_plan`);
+        const now_hourStr = String(Math.floor(nextBus / 3600)).padStart(2, '0');
+        const now_minutesStr = String(Math.floor(nextBus % 3600 / 60)).padStart(2, '0');
+        now_planElement.textContent = `今 : ${now_hourStr}:${now_minutesStr}`;
+
+        const next_planElement = document.querySelector(`.${ClassName} .bus_now_next .next_plan`);
+        const next_hourStr = String(Math.floor(nextNextBus / 3600)).padStart(2, '0');
+        const next_minutesStr = String(Math.floor(nextNextBus % 3600 / 60)).padStart(2, '0');
+        next_planElement.textContent = `次 : ${next_hourStr}:${next_minutesStr}`;
         // --- ゲージの針の回転計算 ---
         if (main_bar) {
             // 1. time_difference を、ゲージが動く有効な表示範囲 (GAUGE_TIME_END_SECONDS 〜 GAUGE_TIME_START_SECONDS) に制限（クランプ）します。
@@ -334,6 +352,15 @@ function updateTime(Array, ClassName) {
 // cons color_yellow = {r: 255, g: 255, b: 0};
 // cons color_red = {r: 255, g: 0, b: 0};
     }else{
+        const now_planElement = document.querySelector(`.${ClassName} .bus_now_next .now_plan`);
+        const now_hourStr = String(Math.floor(nextBus / 3600)).padStart(2, '0');
+        const now_minutesStr = String(Math.floor(nextBus % 3600 / 60)).padStart(2, '0');
+        now_planElement.textContent = `今 : ${now_hourStr}:${now_minutesStr}`;
+
+        const next_planElement = document.querySelector(`.${ClassName} .bus_now_next .next_plan`);
+        const next_hourStr = String(Math.floor(nextNextBus / 3600)).padStart(2, '0');
+        const next_minutesStr = String(Math.floor(nextNextBus % 3600 / 60)).padStart(2, '0');
+        next_planElement.textContent = `次 : ${next_hourStr}:${next_minutesStr}`;
         //見つからなかった時の処理(本日の営業は終了しました)
         timeElement.innerHTML = '本日の営業は<br>終了しました';
         secondsElement.classList.remove('time--clock');
@@ -369,7 +396,7 @@ function rotate_box(){
     current_turn += 0.25;
     message(current_turn, "university");
     message(current_turn, "station");
-    console.log(`現在の角度: ${current_turn}turn`);
+    // console.log(`現在の角度: ${current_turn}turn`);
 }
 
 //上の関数の角度を渡して、それに応じてつぎに回転したときに表示される面にメッセージをいれる関数
@@ -438,11 +465,12 @@ function word_select(array, ClassName){
 }
 
 function now() {
-    const nowElement = document.querySelector('.now');
+    const nowE = document.querySelector('.now');
+    const nowElement = nowE.querySelector('.now_time');
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const seconds = String(now.getSeconds() + 1).padStart(2, '0');
     nowElement.textContent = `現在の時刻: ${hours}:${minutes}:${seconds}`;
 }
 
@@ -469,7 +497,20 @@ function startTimer() {
     }, delay);
 }
 
+function updateDate() {
+    const now = new Date();
+    const dayIndex = now.getDay(); // 曜日を取得 (0: 日曜日, 1: 月曜日, ..., 6: 土曜日)
+    const weekdays = ['日', '月', '火', '水', '木', '金', '土']; // 曜日の配列
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 月は0から始まるので+1
+    const date = String(now.getDate()).padStart(2, '0');
+    // 日付を表示する要素を取得して更新
+    const dayElement = document.querySelector('.now_day');
+    dayElement.textContent = `現在の日付: ${year}/${month}/${date}(${weekdays[dayIndex]})`;
+}
+
 startTimer(); // タイマーを開始
+updateDate(); // 日付を更新
 });
 
 

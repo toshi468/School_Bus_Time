@@ -1,49 +1,107 @@
 html, body {
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
     /* overflow-x: hidden;
     overflow-y: hidden; */
 }
 html {
     background-image: url("./image/bus_stop_afternoon.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+.header{
+    display: flex;
+    background-color: yellowgreen;
+    gap: 15px;
+    align-items: center;
+    height: 70px;
+    .wall{
+        font-size: 3rem;
+        transform: translate(0%, -10%);
+        color: rgb(140, 155, 8);
+    }
+    .link{
+        margin-left: 20px;
+    }
+    a:link, a:visited ,a:hover, a:active {
+        color: blue;
+    }
+    .title{
+        font-family: 'Courier New', Courier, monospace;
+        -webkit-text-stroke: white 0.1rem;
+        font-size: 2.5rem;
+    }
+
+}
+.now{
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 50%;
+    margin: 10px auto;
+    background-color: #3094FE;
+    .now_day, .now_time {
+        font-family: 'Courier New', Courier, monospace;
+        -webkit-text-stroke: white 0.1rem;
+        color: white;
+        font-size: 2rem;
+    }
+}
+
 
 /* 「大学 発」と「駅 発」の親を横並びに */
 .kanban {
-  display: flex;
-  gap: 40px; /* 2つの「大学 発」と「駅 発」の間隔 */
-}
-
-/* 「今」「次」を横並びに */
-.bus_now_next {
-  display: flex;
-  gap: 10px;
-}
-
-
-/* body{
-    opacity:0 ;
-    transition: opacity 1.2s ease-out;
-} */
-
-/* body.loaded {
-    opacity: 1;
-} */
-
-.h1{
-    font-family: 'Courier New', Courier, monospace;
-    -webkit-text-stroke: white 0.1rem;
-    margin-top: 0;
-}
-
-.bus_now_next{
     display: flex;
-    margin-bottom: 0;
-    font-size: 30px;
-    gap: 6rem;
     justify-content: center;
+    gap: 250px; /* 2つの「大学 発」と「駅 発」の間隔 */
+
+    .bus_title{
+        display: flex;
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        line-height: 0;
+        background-image: url("./image/waku_kanbandai_tuta.png");
+        background-position: center;
+        background-size: 100%;
+
+        h2, h3{
+            margin: 1.5rem;
+        }
+
+        .bus_now_next {
+            display: flex;
+            font-size: 1.3rem;
+            margin: 0;
+            gap: 0.05rem;
+        }
+        .now_plan {
+            font-family: 'Courier New', Courier, monospace;
+            -webkit-text-stroke: rgb(87, 51, 4) 0.05rem;
+            color: #ffee00;
+        }
+        .next_plan {
+            font-family: 'Courier New', Courier, monospace;
+            -webkit-text-stroke: rgb(87, 51, 4) 0.05rem;
+            color: #02f50e;
+        }
+        .where_to {
+            font-size: 2.5rem;
+        }
+    }
+
+    .gauge{
+        margin: 40px;
+    }
+
 }
+
 
 
 .gauge {
@@ -71,7 +129,7 @@ html {
     transform: translate(-49%, -55%);
     position: absolute;
     border-radius: 60%;
-    background-color: rgb(196, 191, 191);
+    background-color: rgb(192, 190, 190);
     content: "";
     width: 350px;
     height: 314px;
@@ -152,7 +210,7 @@ html {
     left: 50%;
     width: 60%;
     height: 150%;
-    background-color:rgb(196, 191, 191) ;
+    background-color:rgb(192, 190, 190) ;
     /* background-color: pink; */
     transform: translate(-50%, -50%);
     transform: rotate(0deg) ;
@@ -226,22 +284,7 @@ html {
     size: 100px;
 }
 
-h1 {
-    font-size: 3rem;
-    text-align: center;
-    margin: 0;
-}
 
-h2 {
-    height: 70px;
-    font-size: 2rem;
-    text-align: center;
-    margin: 0;
-    background-image: url("./image/waku_kanbandai_tuta.png");
-    background-position: center;
-    background-size: 105%;
-    background-repeat: no-repeat;
-}
 
 
 /* 画面が狭いときに縦並びにするためのメディアクエリ */
@@ -321,22 +364,40 @@ h2 {
 .top    { height: 80px; transform: rotateX(90deg) translateZ(40px); }
 .bottom { height: 80px; transform: rotateX(-90deg) translateZ(40px); }
 
-.Buss{
+.bussAnimation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+        .Buss_left_container{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-120%, -80%);
+            // animation: sleep_left 4s infinite;
+            .Buss_right{
+                scale: 1.3;
+            }
+        }
+        .Buss_right_container{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(60%, -80%);
+            // animation: sleep_left 4s infinite;
+            .Buss_left{
+                scale: 1.3;
+            }
+        }
+    .Sleep{
+        transform: translate(-40%, -70%);
+        scale: 0.5;
+    }
 }
 
-.Buss_left{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-70%, -100%);
-}
-
-.Buss_right{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(0%, -100%);
-}
 
 /* .Buss_right{
     position: relative;
@@ -349,7 +410,11 @@ h2 {
     /* animation: sleep 4s infinite; 
 } */
 
-@keyframes sleep {
-  0%, 100% { transform: translateY(0) scaleY(1); }
-  50% { transform: translateY(-5px) scaleY(1.1); }
+@keyframes sleep_left {
+  0%, 100% { transform: translate(-180%, -80%)  scaleY(1.2); }
+  50% { transform: translate(-180%, -84%)  scaleY(1.25); }
+}
+@keyframes sleep_right {
+  0%, 100% { transform: translate(110%, -80%) scaleY(1.2); }
+  50% { transform: translate(110%, -84%)  scaleY(1.25); }
 }
