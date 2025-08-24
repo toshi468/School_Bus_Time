@@ -200,10 +200,39 @@ function updateTime(Array, ClassName) {
     const candidate = Array.find(time => time > nextBus);
     const nextNextBus = candidate !== undefined ? candidate : Array[0]; // 次の次のバスの時刻を取得
 
+    // now の年月日を取得
+    const todayYear = now.getFullYear();
+    const todayMonth = now.getMonth();
+    const todayDate = now.getDate();
+
+    // nextBus の時刻に変換
+    const nextBusHour = Math.floor(nextBus / 3600);
+    const nextBusMinute = Math.floor((nextBus % 3600) / 60);
+    const nextBusSecond = nextBus % 60;
+
+    //なんかこうするときれいにまとまります(1000ミリきれいに)(おそらく、秒をしていしてDateをつくると丸められる)
+    const TotalBusHour = Math.floor(total_seconds / 3600);
+    const TotalBusMinute = Math.floor((total_seconds % 3600) / 60);
+    const TotalBusSecond = total_seconds % 60;
+    const TotalNow = new Date(todayYear, todayMonth, todayDate, TotalBusHour, TotalBusMinute, TotalBusSecond);
+
+    const nextBusTime = new Date(todayYear, todayMonth, todayDate, nextBusHour, nextBusMinute, nextBusSecond);
+    const diffMs = nextBusTime - TotalNow; // ミリ秒単位で差を計算
+
+    // console.log(nextBusTime, TotalNow, diffMs);
+    // 出発判定(アニメーションの実行)
+    if(diffMs <= 1000){
+        setTimeout(() => {
+            console.log("出発しました")
+        }, 1000);
+    }
+
+    const sleepControl = document.querySelector(`.${ClassName} .Sleep`);
+
     const background = document.querySelector('html');
     const now_Hour = now.getHours();
     if(6 <= now_Hour && now_Hour < 17){
-        console.log(now_Hour);
+        // console.log(now_Hour);
         background.style.backgroundImage = 'url(./image/bus_stop_afternoon.jpg)';
     }else if(17 <= now_Hour && now_Hour < 19){
         background.style.backgroundImage = 'url(./image/bus_stop_evening.jpg)';
@@ -221,6 +250,10 @@ function updateTime(Array, ClassName) {
     const white_bar = document.querySelector(`.${ClassName} .bar-white`); // ここで白で一部を隠す用のバーを取得
     let currentColor = {r:0, g:0, b:0}; // 計算される現在の色
     if(nextBus != undefined){
+        //バスアニメーション管理
+        sleepControl.classList.remove("Sleep-close");
+        sleepControl.classList.add("Sleep-active");
+
         //見つかった時の処理(時刻表示)
         // 次のバスの時刻から現在までの時間を計算する(残り時間を取得)
         const time_difference = nextBus - total_seconds;
@@ -362,6 +395,10 @@ function updateTime(Array, ClassName) {
         const next_minutesStr = String(Math.floor(nextNextBus % 3600 / 60)).padStart(2, '0');
         next_planElement.textContent = `次 : ${next_hourStr}:${next_minutesStr}`;
         //見つからなかった時の処理(本日の営業は終了しました)
+
+        sleepControl.classList.remove("Sleep-active");
+        sleepControl.classList.add("Sleep-close");
+
         timeElement.innerHTML = '本日の営業は<br>終了しました';
         secondsElement.classList.remove('time--clock');
         limit_text.classList.add('time--closed');

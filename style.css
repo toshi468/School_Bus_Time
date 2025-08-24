@@ -379,6 +379,7 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-120%, -80%);
+  animation: sleep_left 4s infinite;
 }
 .bussAnimation .Buss_left_container .Buss_right {
   scale: 1.3;
@@ -389,13 +390,20 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(60%, -80%);
+  animation: sleep_right 4s infinite;
 }
 .bussAnimation .Buss_right_container .Buss_left {
   scale: 1.3;
 }
-.bussAnimation .Sleep {
+.bussAnimation .Sleep-active {
   transform: translate(-40%, -70%);
   scale: 0.5;
+  opacity: 0;
+}
+.bussAnimation .Sleep-close {
+  transform: translate(-40%, -70%);
+  scale: 0.5;
+  opacity: 1;
 }
 
 /* .Buss_right{
@@ -409,17 +417,17 @@ html {
 } */
 @keyframes sleep_left {
   0%, 100% {
-    transform: translate(-180%, -80%) scaleY(1.2);
+    transform: translate(-120%, -80%) scaleY(1.2);
   }
   50% {
-    transform: translate(-180%, -84%) scaleY(1.25);
+    transform: translate(-120%, -84%) scaleY(1.25);
   }
 }
 @keyframes sleep_right {
   0%, 100% {
-    transform: translate(110%, -80%) scaleY(1.2);
+    transform: translate(60%, -80%) scaleY(1.2);
   }
   50% {
-    transform: translate(110%, -84%) scaleY(1.25);
+    transform: translate(60%, -84%) scaleY(1.25);
   }
 }/*# sourceMappingURL=style.css.map */
